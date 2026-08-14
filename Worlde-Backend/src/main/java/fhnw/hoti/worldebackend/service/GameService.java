@@ -81,7 +81,7 @@ public class GameService {
         game.setCompleted(completed);
         gameRepository.save(game);
 
-        return new GuessResponse(feedback, completed, success);
+        return new GuessResponse(feedback, completed, success, solution);
     }
 
     private String generateFeedback(String guess, String solution) {

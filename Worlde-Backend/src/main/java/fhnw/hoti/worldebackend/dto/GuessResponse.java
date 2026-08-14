@@ -9,4 +9,5 @@ public class GuessResponse {
     private String feedback;
     private boolean completed;
     private boolean success;
+    private String solutionWord;
 }
