@@ -5,6 +5,7 @@ import fhnw.hoti.worldebackend.dto.GuessRequest;
 import fhnw.hoti.worldebackend.dto.GuessResponse;
 import fhnw.hoti.worldebackend.model.Game;
 import fhnw.hoti.worldebackend.repository.GameRepository;
+import fhnw.hoti.worldebackend.dto.StatisticsResponse;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.connector.InputBuffer;
@@ -56,6 +57,7 @@ public class GameService {
                 .solutionWord(word)
                 .attempts(0)
                 .completed(false)
+                .hintsUsed(0)
                 .build();
         return gameRepository.save(game);
     }
@@ -84,6 +86,33 @@ public class GameService {
         return new GuessResponse(feedback, completed, success, solution);
     }
 
+    public StatisticsResponse getStatistics() {
+
+        List<Game> games = gameRepository.findAll();
+
+        List<Game> completedGames = games.stream()
+                .filter(Game::isCompleted)
+                .toList();
+
+        long gamesPlayed = completedGames.size();
+
+        long totalAttempts = completedGames.stream()
+                .mapToLong(Game::getAttempts)
+                .sum();
+
+        double averageAttempts = 0;
+
+        if (gamesPlayed > 0) {
+            averageAttempts = (double) totalAttempts / gamesPlayed;
+        }
+
+        return new StatisticsResponse(
+                gamesPlayed,
+                totalAttempts,
+                averageAttempts
+        );
+    }
+
     private String generateFeedback(String guess, String solution) {
         StringBuilder result = new StringBuilder();
 
@@ -100,5 +129,32 @@ public class GameService {
             }
         }
         return result.toString();
+    }
+
+    public String getHint(Long gameId) {
+
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+
+        if (game.getHintsUsed() == null) {
+            game.setHintsUsed(0);
+        }
+
+        if (game.isCompleted()) {
+            throw new RuntimeException("Game already finished");
+        }
+
+        if (game.getHintsUsed() >= 2) {
+            throw new RuntimeException("No hints left");
+        }
+
+        String solution = game.getSolutionWord();
+
+        char hint = solution.charAt(random.nextInt(solution.length()));
+
+        game.setHintsUsed(game.getHintsUsed() + 1);
+        gameRepository.save(game);
+
+        return String.valueOf(hint);
     }
 }

@@ -21,6 +21,9 @@ public class Game {
 
     private boolean completed;
 
+    @Column(columnDefinition = "integer default 0")
+    private Integer hintsUsed = 0;
+
     public void setAttempts(int attempts) {
         if(attempts > 6 || attempts < 1) {
             this.attempts = 6;
@@ -32,4 +35,6 @@ public class Game {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    public void setHintsUsed(int hintsUsed) {this.hintsUsed = hintsUsed;}
 }

@@ -3,6 +3,7 @@ package fhnw.hoti.worldebackend.controller;
 import fhnw.hoti.worldebackend.dto.GuessRequest;
 import fhnw.hoti.worldebackend.dto.GuessResponse;
 import fhnw.hoti.worldebackend.dto.StartGameResponse;
+import fhnw.hoti.worldebackend.dto.StatisticsResponse;
 import fhnw.hoti.worldebackend.model.Game;
 import fhnw.hoti.worldebackend.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,16 @@ public class GameController {
     public StartGameResponse startGame() {
         Game game = gameService.startNewGame();
         return new StartGameResponse(game.getId());
+    }
+
+    @GetMapping("/stats")
+    public StatisticsResponse getStatistics() {
+        return gameService.getStatistics();
+    }
+
+    @GetMapping("/{gameId}/hint")
+    public String getHint(@PathVariable Long gameId) {
+        return gameService.getHint(gameId);
     }
 
     @PostMapping("/guess")
