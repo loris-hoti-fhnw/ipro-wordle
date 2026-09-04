@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a86e09e5-3915-40e5-9fcc-f152092e27fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle-Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle-Frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/src/components/GameBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/src/components/GameBoard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/src/services/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/src/views/GameView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle-Frontend/wordle-frontend/src/views/GameView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worlde-Backend/src/main/java/fhnw/hoti/worldebackend/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worlde-Backend/src/main/java/fhnw/hoti/worldebackend/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worlde-Backend/src/main/java/fhnw/hoti/worldebackend/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worlde-Backend/src/main/java/fhnw/hoti/worldebackend/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worlde-Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Worlde-Backend/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worlde-Backend/src/main/java/fhnw/hoti/worldebackend/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worlde-Backend/src/main/java/fhnw/hoti/worldebackend/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worlde-Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Worlde-Backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/wordle-db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/wordle-db.mv.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +53,7 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.WorldeBackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameServiceTest.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
@@ -71,13 +77,17 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Projects/ipro-wordle/game/src/Main.java&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projects\ipro-wordle\Worlde-Backend\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="fhnw.hoti.worldebackend" />
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager">
@@ -92,8 +102,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -120,6 +130,11 @@
       <workItem from="1786711146547" duration="3923000" />
       <workItem from="1786914280486" duration="3508000" />
       <workItem from="1786960924605" duration="1730000" />
+      <workItem from="1788360969623" duration="669000" />
+      <workItem from="1788442349594" duration="984000" />
+      <workItem from="1788528756504" duration="2316000" />
+      <workItem from="1788531771119" duration="90000" />
+      <workItem from="1788531977713" duration="1833000" />
     </task>
     <servers />
   </component>

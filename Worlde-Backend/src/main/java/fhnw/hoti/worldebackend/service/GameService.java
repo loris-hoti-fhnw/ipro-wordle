@@ -29,7 +29,7 @@ public class GameService {
     private final Random random = new Random();
 
     @PostConstruct
-    private void loadWords() {
+    public void loadWords() {
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(
                         new ClassPathResource("words.txt").getInputStream()
@@ -72,6 +72,10 @@ public class GameService {
 
         String guess = request.getGuess().toUpperCase();
         String solution = game.getSolutionWord();
+
+        if (!words.contains(guess)) {
+            throw new RuntimeException("Word not found");
+        }
 
         game.setAttempts(game.getAttempts() + 1);
 

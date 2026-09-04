@@ -6,7 +6,7 @@
             v-for="(char, i) in row.word"
             :key="i"
             class="tile"
-            :class="color(row.feedback[i])"
+            :class="color(row.feedback[i] ?? '')"
         >
           {{ char }}
         </div>

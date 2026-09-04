@@ -25,7 +25,12 @@
 
 
     <!-- Wordle -->
-    <div class="game-center">
+    <div class="game-center" @click="focusInput">
+
+      <div class="game-info mb-4">
+        <span>6 Versuche pro Spiel</span>
+        <span>Nur Englische Wörter</span>
+      </div>
 
       <GameBoard :rows="rows" />
 
@@ -192,6 +197,12 @@ watch(guess, (newValue, oldValue) => {
   }
 })
 
+function focusInput() {
+  if (!gameOver.value) {
+    guessInput.value?.focus()
+  }
+}
+
 async function getHint() {
   if (hintsUsed.value >= 2 || gameOver.value) return
 
@@ -209,30 +220,36 @@ async function loadStatistics() {
 async function submitGuess() {
   if (guess.value.length !== 5 || gameOver.value) return
 
-  const response = await api.post<GuessResponse>('/game/guess', {
-    gameId: Number(gameId.value),
-    guess: guess.value
-  })
+  try {
+    const response = await api.post<GuessResponse>('/game/guess', {
+      gameId: Number(gameId.value),
+      guess: guess.value
+    })
 
-  rows.value.push({
-    word: guess.value.toUpperCase(),
-    feedback: response.data.feedback
-  })
+    rows.value.push({
+      word: guess.value.toUpperCase(),
+      feedback: response.data.feedback
+    })
 
-  if (response.data.success) {
-    message.value = `Gewonnen! Das Wort war: ${response.data.solutionWord}`
-    gameOver.value = true
-  } else if (response.data.completed) {
-    message.value = `Spiel verloren. Das richtige Wort war: ${response.data.solutionWord}`
-    gameOver.value = true
+    if (response.data.success) {
+      message.value = `Gewonnen! Das Wort war: ${response.data.solutionWord}`
+      gameOver.value = true
+    } else if (response.data.completed) {
+      message.value = `Spiel verloren. Das richtige Wort war: ${response.data.solutionWord}`
+      gameOver.value = true
+    }
+
+    if (response.data.completed) {
+      await loadStatistics()
+    }
+
+    guess.value = ''
+    guessInput.value?.focus()
+
+  } catch {
+    message.value = 'Dieses Wort ist nicht in der Wortliste.'
+    guessInput.value?.focus()
   }
-
-  if (response.data.completed) {
-    await loadStatistics()
-  }
-
-  guess.value = ''
-  guessInput.value?.focus()
 }
 
 async function startNewGame() {
@@ -258,6 +275,21 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+.game-info {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.game-info span {
+  background-color: #f1f3f5;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
 
 .game-layout {
   display: grid;
