@@ -8,15 +8,15 @@ Individuelles Softwareprojekt im Rahmen des IPRO-Moduls an der FHNW.
 
 In diesem Projekt wird eine eigene Web-Version des Spiels Wordle entwickelt.
 
-Das Ziel besteht darin, ein vollständiges und einfach bedienbares Computerspiel umzusetzen und dabei die im Studium erlernten Kenntnisse in den Bereichen Softwareentwicklung und User Interaction praktisch anzuwenden.
+Das Ziel besteht darin, ein vollständiges und einfach bedienbares Wordle umzusetzen und dabei die im Studium erlernten Kenntnisse in den Bereichen Softwareentwicklung und User Interaction praktisch anzuwenden.
 
-Das Projekt besteht aus einem Vue.js-Frontend und einem Java-Spring-Boot-Backend. Die Kommunikation zwischen beiden Anwendungen erfolgt über eine REST-Schnittstelle.
+Das Projekt besteht aus einem Vue.js-Frontend und einem Java-Spring-Boot-Backend. Die Kommunikation zwischen beiden Anwendungen erfolgt über eine REST-Schnittstelle. Die Anwendung wurde zusätzlich auf Microsoft Azure bereitgestellt und kann dadurch ohne lokale Entwicklungsumgebung über das Web verwendet werden.
 
 ---
 
 ## Spielprinzip
 
-Bei jedem neuen Spiel wird zufällig ein Wort mit genau fünf Buchstaben aus einer Liste ausgewählt.
+Bei jedem neuen Spiel wird zufällig ein Wort mit genau fünf Buchstaben ausgewählt.
 
 Der Spieler hat maximal sechs Versuche, dieses Wort zu erraten.
 
@@ -37,19 +37,20 @@ Nach Abschluss des Spiels wird das Lösungswort angezeigt und ein neues Spiel ka
 Das Projekt ist in Frontend und Backend aufgeteilt.
 
 ```text
-                  REST / HTTP
-+----------------+          +---------------------+
-|                |          |                     |
-| Vue Frontend   | <------> | Spring Boot Backend |
-|                |          |                     |
-+----------------+          +----------+----------+
-                                       |
-                                       |
-                              +--------v--------+
-                              |                 |
-                              | H2-Datenbank    |
-                              |                 |
-                              +-----------------+
+                        HTTPS / REST
++-----------------------+          +----------------------+
+|                       |          |                      |
+| Vue Frontend          | <------> | Spring Boot Backend  |
+| Azure Static Website  |          | Azure App Service    |
+|                       |          |                      |
++-----------------------+          +----------+-----------+
+                                              |
+                                              |
+                                     +--------v--------+
+                                     |                 |
+                                     | H2-Datenbank    |
+                                     |                 |
+                                     +-----------------+
 ```
 
 ### Frontend
@@ -85,7 +86,7 @@ Verwendete Technologien:
 
 - Java
 - Spring Boot
-- Spring Data JPA
+- Spring Data JPA / Hibernate
 - H2
 
 Das Backend ist unter anderem verantwortlich für:
@@ -266,6 +267,8 @@ Folgende Funktionen sind nicht Teil des notwendigen Grundumfangs und können abh
 - Zurücksetzen der Statistik
 - Dark Mode
 - Weitere optische Verbesserungen
+- Barrierefreihet
+- Setzen der Anzahl Buchstaben/Versuche
 
 ---
 
@@ -298,10 +301,17 @@ http://localhost:8080
 
 ## Frontend starten
 
-Richtigen Pfad öffnen:
+Backend kommunikationspfad ändern
+
+```
+Unter ./Wordle-Frontend/wordle-frontend/src/services/api.ts
+```
+
+
+Frontend Pfad öffnen:
 
 ```bash
-Cd Wordle-Frontend/wordle-frontend
+Cd ./Wordle-Frontend/wordle-frontend
 ```
 
 Abhängigkeiten installieren:
@@ -322,9 +332,52 @@ Die genaue Adresse des Frontends wird beim Start durch Vite angezeigt.
 
 # Deployment
 
-Als letzter Projektschritt soll die Anwendung online bereitgestellt werden, damit sie direkt im Web gespielt werden kann. Dafür müssen Frontend und Backend auf einer öffentlich erreichbaren Umgebung laufen und das Frontend auf die öffentliche Backend-Adresse zugreifen.
+Die Anwendung wurde auf **Microsoft Azure** bereitgestellt, damit sie ohne lokale Entwicklungsumgebung im Web verwendet werden kann.
 
-Nach dem Deployment soll die Anwendung über eine Webadresse erreichbar sein und ohne lokale Entwicklungsumgebung funktionieren.
+Frontend und Backend werden getrennt gehostet:
+
+| Teil | Azure-Dienst | Aufgabe |
+|---|---|---|
+| Frontend | Azure Storage Static Website | Stellt die gebaute Vue-Anwendung aus dem `dist`-Ordner bereit. |
+| Backend | Azure App Service | Führt die Java-Spring-Boot-Anwendung und die REST-Schnittstelle aus. |
+| Datenhaltung | H2 | Speichert die Spieldaten des Backends. |
+
+## Ablauf des Deployments
+
+### Backend
+
+Das Spring-Boot-Backend wurde als Azure App Service mit Java 21 bereitgestellt. Das Maven-Projekt wird zuerst gebaut und anschliessend auf den App Service deployed.
+
+Öffentliche Backend-Adresse:
+
+```text
+https://worlde-backend-1788530434134.azurewebsites.net
+```
+
+### Frontend
+
+Für das Vue-Frontend wird zuerst ein Production-Build erstellt:
+
+```bash
+npm install
+npm run build
+```
+
+Vite erzeugt dadurch den Ordner `dist`. Der Inhalt dieses Ordners wird in den `$web`-Container einer Azure Storage Static Website hochgeladen. Dadurch werden `index.html`, JavaScript, CSS und weitere statische Dateien direkt über Azure bereitgestellt.
+
+Das Frontend verwendet in `api.ts` die öffentliche URL des Azure-Backends anstelle von `localhost`, damit die REST-Anfragen auch nach dem Deployment funktionieren.
+
+Öffentliche Frontend-Adresse:
+
+```text
+https://loriswordle2026.z1.web.core.windows.net/
+```
+
+### Verbindung zwischen Frontend und Backend
+
+Da Frontend und Backend unter unterschiedlichen Adressen laufen, wurde für das Backend CORS so konfiguriert, dass Anfragen von der öffentlichen Frontend-Adresse erlaubt sind.
+
+Nach dem Deployment wurden die wichtigsten Abläufe erneut online geprüft, unter anderem Spielstart, Wortprüfung, Hints, Statistik sowie Gewinn- und Verlustzustand.
 
 ---
 
@@ -356,6 +409,7 @@ Die zentralen Abläufe des Spiels werden während der Entwicklung manuell und mi
 | Spiel beenden | Das Lösungswort wird angezeigt. |
 | Neues Spiel auswählen | Spielfeld wird geleert und neues Spiel gestartet. |
 | Statistik anzeigen | Gespielte Spiele, Versuche insgesamt und Durchschnitt werden dargestellt. |
+| Online-Version öffnen | Frontend lädt über Azure und kann Requests an das Azure-Backend senden. |
 
 ---
 
@@ -397,10 +451,9 @@ Testfälle werden definiert, mit denen die wichtigsten Spielabläufe geprüft we
 
 Die Anwendung wird mit Java Spring Boot und Vue.js implementiert.
 
-Die Spieldaten werden persistent in einer H2-Datenbank gespeichert und das Frontend kommuniziert über Axios mit der REST-Schnittstelle.
+Die Spieldaten werden persistent gespeichert und das Frontend kommuniziert über Axios mit der REST-Schnittstelle.
 
-Während der Entwicklung werden die einzelnen Funktionen schrittweise implementiert und getestet. 
-Ausserdem wurden für die Grundfunktionalität automatisierte Tests erstellt.
+Während der Entwicklung werden die einzelnen Funktionen schrittweise implementiert und getestet.
 
 ---
 
@@ -472,8 +525,8 @@ Das Projekt befindet sich in einer fortgeschrittenen Entwicklungsphase.
 
 ### Noch offen
 
-- [ ] Deployment der Anwendung im Web
-- [ ] Abschluss und Kontrolle der Dokumentation
+- [x] Deployment der Anwendung im Web
+- [x] Abschluss und Kontrolle der Dokumentation
 
 ---
 
@@ -481,12 +534,13 @@ Das Projekt befindet sich in einer fortgeschrittenen Entwicklungsphase.
 
 Im Projekt wurde ChatGPT als unterstützendes Werkzeug eingesetzt.
 
-Die Unterstützung umfasste unter anderem:
+Die Unterstützung umfasste:
 
 - Erklärungen zu Java, Spring Boot, Vue.js und TypeScript
+- Hilfe bei Deployment-Fehler
 - Vorschläge für einfachere Implementierungen
-- Unterstützung bei der Strukturierung der Dokumentation
-- Formulierung und Überarbeitung von Texten
+- Vorschläge für Frontend verschönerung
+- Unterstützung bei der Strukturierung und Umformulierung der Dokumentation/Projektplanung
 
 Die verwendeten Lösungen wurden vor der Übernahme geprüft und an das eigene Projekt angepasst.
 
@@ -500,5 +554,7 @@ Die verwendeten Lösungen wurden vor der Übernahme geprüft und an das eigene P
 - Spring Boot Dokumentation
 - Bootstrap Dokumentation
 - Axios Dokumentation
+- Microsoft Azure Dokumentation
 - Eigene frühere Projekte
+- Reddit
 - ChatGPT
