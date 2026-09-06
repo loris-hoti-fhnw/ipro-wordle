@@ -4,7 +4,7 @@
 
 Für das IPRO-Projekt wurde ein Gesamtaufwand von ungefähr **180 Stunden** eingeplant.
 
-Die Planung wurde in grössere Arbeitspakete unterteilt. Die Struktur orientiert sich an einer Issue-basierten Projektplanung, wie sie beispielsweise in GitLab verwendet werden kann.
+Die Planung wurde in grössere Arbeitspakete unterteilt. Die Struktur orientiert sich an einer Issue-basierten Projektplanung, wie sie in GitLab verwendet werden kann.
 
 Da GitHub in diesem Projekt hauptsächlich für die Versionsverwaltung verwendet wurde, wurde die Projektplanung separat dokumentiert und nicht über GitHub Issues geführt.
 
@@ -142,12 +142,8 @@ Beispiele:
 
 ---
 
-## Ergebnis
+## Feedback
 
-Am Ende des Projekts steht eine vollständig spielbare Wordle-Anwendung mit getrenntem Frontend und Backend.
-
-Feedback: 
-
-Anfangs hatte ich den Aufwend unterschätzt und wurde von meinem Betreuer darauf hingewiesen, dass ich mich mehr bemühen sollte. Diesen Ratschlag nahm ich mir zu herzen und setzt ihn auch direkt um.
-Es gab immer wieder Probleme und Änderungen am Projekt die mich mehr Zeit gekostet haben als erwartet, vorallem das Deployment & die Planung. Jedoch habe ich auch genau an diesen Punkten am meisten gelernt.
+Anfangs hatte ich den Aufwand unterschätzt und wurde von meinem Betreuer darauf hingewiesen, dass ich mich mehr bemühen sollte. Diesen Ratschlag nahm ich sehr ernst und setzt ihn auch direkt um.
+Es gab immer wieder Probleme und Änderungen am Projekt die mich mehr Zeit gekostet haben als erwartet, vorallem das Deployment & die Planung, jedoch habe ich auch genau an diesen Punkten am meisten gelernt.
 Ich hatte davor noch nie ein Deployment von einem Projekt gemacht und habe dadurch sehr viel gelernt.

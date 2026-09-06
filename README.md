@@ -492,11 +492,24 @@ Eingaben werden direkt als einzelne Buchstaben in fünf Kacheln dargestellt. Ber
 
 Zusätzlich wird eine virtuelle Tastatur angezeigt. Beim Drücken einer Taste wird der entsprechende Buchstabe kurz hervorgehoben.
 
+### Usability-Test
+
+Die Anwendung wurde von 3 Personen ausprobiert während dem Feedbackmarkt. 
+
+Dabei wurde insbesondere beobachtet:
+- Ist die Eingabe ohne Erklärung verständlich?
+- Ist das farbliche Feedback verständlich?
+- Ist klar, wie ein neues Spiel gestartet wird?
+- Bleibt die Bedienung nach einem Versuch flüssig?
+
+Aus dem Feedback wurden unter anderem der automatische Eingabefokus,
+die sichtbaren Eingabekacheln und die Anzeige der Spielregeln verbessert.
+
 ---
 
 # Aktueller Stand
 
-Das Projekt befindet sich in einer fortgeschrittenen Entwicklungsphase.
+Das Projekt ist abgeschlossen, bietet aber immernoch Möglichkeiten zur Besserung.
 
 ### Umgesetzt
 
@@ -522,9 +535,6 @@ Das Projekt befindet sich in einer fortgeschrittenen Entwicklungsphase.
 - [x] Zwei Hints pro Spiel
 - [x] Anzeige der Spielregeln im Frontend
 - [x] Einfache Unit-Tests für zentrale Backend-Logik
-
-### Noch offen
-
 - [x] Deployment der Anwendung im Web
 - [x] Abschluss und Kontrolle der Dokumentation
 
@@ -537,7 +547,9 @@ Im Projekt wurde ChatGPT als unterstützendes Werkzeug eingesetzt.
 Die Unterstützung umfasste:
 
 - Erklärungen zu Java, Spring Boot, Vue.js und TypeScript
-- Hilfe bei Deployment-Fehler
+- Unterstützung bei Deployment-Fehler
+- Unterstützung bei Fehlersuche und Debugging
+- Unterstützung beim Erstellen von Backend-Tests
 - Vorschläge für einfachere Implementierungen
 - Vorschläge für Frontend verschönerung
 - Unterstützung bei der Strukturierung und Umformulierung der Dokumentation/Projektplanung
@@ -546,15 +558,15 @@ Die verwendeten Lösungen wurden vor der Übernahme geprüft und an das eigene P
 
 ---
 
-# Quellen und Hilfsmittel
+## Quellen und Hilfsmittel
 
-- Unterlagen des IPRO-Moduls der FHNW
-- Aufgabenbeschreibung «Individuelles Projekt – Wordle»
-- Vue.js Dokumentation
-- Spring Boot Dokumentation
-- Bootstrap Dokumentation
-- Axios Dokumentation
-- Microsoft Azure Dokumentation
-- Eigene frühere Projekte
-- Reddit
-- ChatGPT
+- FHNW: IPRO Kickoff-Unterlagen
+- FHNW: Merkblatt für Studierende
+- FHNW: Aufgabenbeschreibung «Individuelles Projekt – Wordle»
+- Vue.js Documentation: https://vuejs.org/
+- Spring Boot Documentation: https://docs.spring.io/spring-boot/
+- Bootstrap Documentation: https://getbootstrap.com/docs/
+- Axios Documentation: https://axios-http.com/docs/
+- Microsoft Azure Documentation: https://learn.microsoft.com/azure/
+- Wordle – New York Times: https://www.nytimes.com/games/wordle/index.html
+- ChatGPT von OpenAI – https://chatgpt.com/
